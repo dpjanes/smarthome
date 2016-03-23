@@ -2,6 +2,9 @@
 <thing:thing-descriptions bindingId="yahooweather"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+        xmlns:iot="https://iotdb.org/pub/iot"
+        xmlns:iot-unit="https://iotdb.org/pub/iot-unit"
+        xmlns:iot-purpose="https://iotdb.org/pub/iot-purpose"
         xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
 
     <!-- YahooWeather Binding -->
@@ -37,6 +40,11 @@
         <category>Temperature</category>
         <state readOnly="true" pattern="%.1f °C">
         </state>
+        <iot:purpose>iot-purpose:temperature</iot:purpose>         <!-- this is the key bit, the "atom" -->
+        <iot:type>iot:type.number</iot:type>                    <!-- e.g. the JSON equivalent type -->
+        <iot:arithmetic-precision>1</iot:arithmetic-precision>
+        <iot:unit>iot-unit:temperature.si.celsius</iot:unit>    <!-- or whatever, e.g. qudt.org -->
+        <iot:sensor />                                  <!-- as opposed to actuator, or both -->
     </channel-type>
 
     <channel-type id="humidity">
@@ -46,6 +54,12 @@
         <category>Humidity</category>
         <state readOnly="true" pattern="%d %%">
         </state>
+        <iot:purpose>iot-purpose:humidity</iot:purpose>            <!-- the Atom -->
+        <iot:unit>iot-unit:math.fraction.percent</iot:unit>
+        <iot:type>iot:type.integer</iot:type>                   <!-- e.g. the JSON equivalent type -->
+        <iot:minimum>0</iot:minimum>
+        <iot:maximum>100</iot:maximum>
+        <iot:sensor />
     </channel-type>
 
     <channel-type id="pressure">
@@ -55,6 +69,10 @@
         <category>Pressure</category>
         <state readOnly="true" pattern="%.1f hPa">
         </state>
+        <iot:purpose>iot-purpose:pressure</iot:purpose>            <!-- the Atom -->
+        <iot:unit>iot-unit:iot-unit:pressure.si.bar.-3</iot:unit>
+        <iot:type>iot:type.number</iot:type>                   <!-- e.g. the JSON equivalent type -->
+        <iot:sensor />
     </channel-type>
 
 </thing:thing-descriptions>
